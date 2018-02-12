@@ -52,29 +52,17 @@ class TimelineTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifer, for: indexPath) as! ReleaseTableViewCell
 
         let item = data[indexPath.row]
         
-        var title = item.title
-        if let range = title?.range(of: "Released") {
-            title?.removeSubrange(range)
-        }
-        
-        cell.textLabel?.text = title
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        
-        guard let date = item.pubDate else {
-            cell.detailTextLabel?.text = item.description
-            return cell
-        }
-        
-        cell.detailTextLabel?.text = dateFormatter.string(from: date)
+        cell.setup(item)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
     }
 
     /*

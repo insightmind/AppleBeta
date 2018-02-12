@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14087.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FcY-GI-RVZ">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14075.4"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,33 +16,53 @@
             <objects>
                 <tableViewController id="9Sh-V6-jBq" customClass="TimelineTableViewController" customModule="AppleBeta" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tI1-kj-0b5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReleaseCell" textLabel="7kv-ul-2QS" detailTextLabel="Eft-Tt-mIq" style="IBUITableViewCellStyleSubtitle" id="pWi-Ah-dOW">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReleaseCell" rowHeight="80" id="pWi-Ah-dOW" customClass="ReleaseTableViewCell" customModule="AppleBeta" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pWi-Ah-dOW" id="QQX-Gn-aWt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7kv-ul-2QS">
-                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="other" translatesAutoresizingMaskIntoConstraints="NO" id="ReR-qS-TOx">
+                                            <rect key="frame" x="7.9999999999999964" y="7.9999999999999964" width="63.666666666666657" height="63.666666666666657"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="ReR-qS-TOx" secondAttribute="height" multiplier="1:1" id="gXU-ou-0MV"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="watchOS 4.3 (15T55176c)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXF-Tb-TRE">
+                                            <rect key="frame" x="79" y="18.333333333333332" width="288" height="22.999999999999996"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eft-Tt-mIq">
-                                            <rect key="frame" x="16" y="25.5" width="33" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feb 7, 2018 at 7:09 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLa-hu-VCJ">
+                                            <rect key="frame" x="79" y="43.333333333333336" width="272" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="qLa-hu-VCJ" secondAttribute="trailing" constant="8" id="Axe-4M-7ip"/>
+                                        <constraint firstItem="ReR-qS-TOx" firstAttribute="top" secondItem="QQX-Gn-aWt" secondAttribute="top" constant="8" id="DAk-rd-fcI"/>
+                                        <constraint firstAttribute="bottom" secondItem="ReR-qS-TOx" secondAttribute="bottom" constant="8" id="QfX-DE-TDb"/>
+                                        <constraint firstItem="qLa-hu-VCJ" firstAttribute="leading" secondItem="ReR-qS-TOx" secondAttribute="trailing" constant="8" id="USv-7T-VWy"/>
+                                        <constraint firstAttribute="trailing" secondItem="tXF-Tb-TRE" secondAttribute="trailing" constant="8" id="gu8-EE-bpE"/>
+                                        <constraint firstItem="ReR-qS-TOx" firstAttribute="leading" secondItem="QQX-Gn-aWt" secondAttribute="leading" constant="8" id="nBD-A2-PK9"/>
+                                        <constraint firstItem="qLa-hu-VCJ" firstAttribute="top" secondItem="tXF-Tb-TRE" secondAttribute="bottom" constant="2" id="oor-cO-EXP"/>
+                                        <constraint firstItem="tXF-Tb-TRE" firstAttribute="centerY" secondItem="QQX-Gn-aWt" secondAttribute="centerY" constant="-10" id="zQV-Y1-23h"/>
+                                        <constraint firstItem="tXF-Tb-TRE" firstAttribute="leading" secondItem="ReR-qS-TOx" secondAttribute="trailing" constant="8" id="zf3-BB-40w"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="releaseDate" destination="qLa-hu-VCJ" id="Azz-gP-cZC"/>
+                                    <outlet property="releaseTitle" destination="tXF-Tb-TRE" id="lnM-76-wlE"/>
+                                    <outlet property="typeImageView" destination="ReR-qS-TOx" id="46v-li-LeF"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -52,7 +74,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z1S-Ib-e4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104.8" y="159.67016491754123"/>
+            <point key="canvasLocation" x="1104.8" y="158.77061469265368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MUE-6K-vsQ">
@@ -60,7 +82,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FcY-GI-RVZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="E8z-Ii-Dvu">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -73,4 +95,7 @@
             <point key="canvasLocation" x="165.59999999999999" y="159.67016491754123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="other" width="100" height="100"/>
+    </resources>
 </document>

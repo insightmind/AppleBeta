@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		811B3F29DFE2C42DB8E1036D /* Pods_AppleBeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F5E6AF826BE8FDE7F64E35 /* Pods_AppleBeta.framework */; };
+		854D0E572031EEF900D33526 /* ReleaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854D0E562031EEF900D33526 /* ReleaseTableViewCell.swift */; };
 		854D258B202E36C6006C756F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854D258A202E36C6006C756F /* AppDelegate.swift */; };
 		854D2590202E36C6006C756F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 854D258E202E36C6006C756F /* Main.storyboard */; };
 		854D2595202E36C7006C756F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 854D2594202E36C7006C756F /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		48F5E6AF826BE8FDE7F64E35 /* Pods_AppleBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BE8680CCE7B29C4A00F8EC6 /* Pods-AppleBeta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppleBeta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppleBeta/Pods-AppleBeta.debug.xcconfig"; sourceTree = "<group>"; };
+		854D0E562031EEF900D33526 /* ReleaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseTableViewCell.swift; sourceTree = "<group>"; };
 		854D2587202E36C6006C756F /* AppleBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		854D258A202E36C6006C756F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		854D258F202E36C6006C756F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				854DDB38202E610F00B7CCF0 /* TimelineTableViewController.swift */,
 				854DDB3A202E615E00B7CCF0 /* Requester.swift */,
+				854D0E562031EEF900D33526 /* ReleaseTableViewCell.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				854D258B202E36C6006C756F /* AppDelegate.swift in Sources */,
+				854D0E572031EEF900D33526 /* ReleaseTableViewCell.swift in Sources */,
 				854DDB39202E610F00B7CCF0 /* TimelineTableViewController.swift in Sources */,
 				854DDB3B202E615E00B7CCF0 /* Requester.swift in Sources */,
 			);
@@ -417,6 +421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V6KWUV4A4U;
 				INFOPLIST_FILE = "AppleBeta/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -437,6 +442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V6KWUV4A4U;
 				INFOPLIST_FILE = "AppleBeta/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
