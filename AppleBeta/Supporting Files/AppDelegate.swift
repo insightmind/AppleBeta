@@ -25,8 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+		let semaphore = DispatchSemaphore(value: 0)
+		var f = RSSFeed?.none
+		Requester.request { feed in
+			f = feed
+			semaphore.signal()
+		}
+		// We get around 30 seconds before the watchdog timer will kill us, so
+		// don't wait too long
+		_ = semaphore.wait(timeout: .now() + .seconds(25))
         
-        guard let feed = Requester.request() else {
+        guard let feed = f else {
             completionHandler(.failed)
             return
         }
