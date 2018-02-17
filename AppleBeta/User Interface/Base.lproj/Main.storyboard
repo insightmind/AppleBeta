@@ -15,20 +15,20 @@
         <scene sceneID="hVA-u4-Gzp">
             <objects>
                 <tableViewController id="9Sh-V6-jBq" customClass="TimelineTableViewController" customModule="AppleBeta" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tI1-kj-0b5">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tI1-kj-0b5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReleaseCell" rowHeight="100" id="pWi-Ah-dOW" customClass="ReleaseTableViewCell" customModule="AppleBeta" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReleaseCell" rowHeight="70" id="pWi-Ah-dOW" customClass="ReleaseTableViewCell" customModule="AppleBeta" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pWi-Ah-dOW" id="QQX-Gn-aWt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ThF-nM-FKI">
-                                            <rect key="frame" x="113.66666666666666" y="32.333333333333343" width="208.33333333333334" height="36"/>
+                                            <rect key="frame" x="83.666666666666671" y="17" width="208.33333333333331" height="36"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="watchOS 4.3 (15T55176c)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXF-Tb-TRE">
                                                     <rect key="frame" x="0.0" y="0.0" width="208.33333333333334" height="20.333333333333332"/>
@@ -37,7 +37,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feb 7, 2018 at 7:09 PM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLa-hu-VCJ">
-                                                    <rect key="frame" x="0.0" y="20.333333333333329" width="139" height="15.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="20.333333333333336" width="139" height="15.666666666666664"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                                             </subviews>
                                         </stackView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="other" translatesAutoresizingMaskIntoConstraints="NO" id="ReR-qS-TOx">
-                                            <rect key="frame" x="16" y="5" width="89.666666666666671" height="89.666666666666671"/>
+                                            <rect key="frame" x="15.999999999999996" y="4.9999999999999964" width="59.666666666666657" height="59.666666666666657"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="ReR-qS-TOx" secondAttribute="height" multiplier="1:1" id="uaG-Is-nhN"/>
                                             </constraints>
