@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 		let semaphore = DispatchSemaphore(value: 0)
 		var f = RSSFeed?.none
-		Requester.request { feed in
+        Requester.request(url: ReleaseSources.apple.url()) { feed in
 			f = feed
 			semaphore.signal()
 		}

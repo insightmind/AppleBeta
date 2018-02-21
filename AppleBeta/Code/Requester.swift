@@ -10,14 +10,23 @@ import Foundation
 import UserNotifications
 import FeedKit
 
+
+enum ReleaseSources: String {
+    case ipsw = "https://ipsw.me/timeline.rss"
+    case apple = "https://developer.apple.com/news/releases/rss/releases.rss"
+
+    func url() -> URL? { return URL(string: self.rawValue) }
+}
+
 class Requester {
 
-    static let feedURL = URL(string: "https://ipsw.me/timeline.rss")
     static let queue = DispatchQueue(label: "AppleBeta", qos: .userInitiated)
 
-    static func request(completion: ((RSSFeed?) -> Void)?) {
+    static var currentSource: ReleaseSources = .apple
+
+    static func request(url: URL?, completion: ((RSSFeed?) -> Void)?) {
         queue.async {
-            guard let feedURL = Requester.feedURL else {
+            guard let feedURL = url else {
                 completion?(nil)
                 return
             }

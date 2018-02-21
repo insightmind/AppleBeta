@@ -16,8 +16,14 @@ class TimelineTableViewController: UITableViewController {
 
     let reuseIdentifer = "ReleaseCell"
 
+    var source: ReleaseSources?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if source == nil {
+            self.source = Requester.currentSource
+        }
 
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
@@ -30,15 +36,25 @@ class TimelineTableViewController: UITableViewController {
         refresh(self)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        refresh(self)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     @objc func refresh(_ sender: Any?) {
-        Requester.request { feed in
+        guard let source = self.source else { return }
+        Requester.request(url: source.url()) { feed in
             DispatchQueue.main.async {
-                self.data = feed?.items?.reversed() ?? []
+                switch source {
+                case .apple:
+                    self.data = feed?.items ?? []
+                case .ipsw:
+                    self.data = feed?.items?.reversed() ?? []
+                }
                 self.tableView.reloadData()
                 // End refreshing; if we don't do it this way the refresh
                 // animation ends up jerky
