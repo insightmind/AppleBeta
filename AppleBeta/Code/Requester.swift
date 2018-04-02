@@ -10,7 +10,6 @@ import Foundation
 import UserNotifications
 import FeedKit
 
-
 enum ReleaseSources: String {
     case ipsw = "https://ipsw.me/timeline.rss"
     case apple = "https://developer.apple.com/news/releases/rss/releases.rss"

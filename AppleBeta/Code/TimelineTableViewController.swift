@@ -49,12 +49,7 @@ class TimelineTableViewController: UITableViewController {
         guard let source = self.source else { return }
         Requester.request(url: source.url()) { feed in
             DispatchQueue.main.async {
-                switch source {
-                case .apple:
-                    self.data = feed?.items ?? []
-                case .ipsw:
-                    self.data = feed?.items?.reversed() ?? []
-                }
+                self.data = feed?.items ?? []
                 self.tableView.reloadData()
                 // End refreshing; if we don't do it this way the refresh
                 // animation ends up jerky
