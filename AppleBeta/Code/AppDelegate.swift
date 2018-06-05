@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let result = Requester.handle(feed: feed)
         
-        completionHandler(result)
+        completionHandler(.newData)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
