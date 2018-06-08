@@ -56,6 +56,7 @@ class Requester {
         }
     }
 
+    @discardableResult
     static func handle(feed: RSSFeed) -> UIBackgroundFetchResult {
 
         guard let pubDate = feed.pubDate else { return .noData }
@@ -80,7 +81,7 @@ class Requester {
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = description
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
 
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
 

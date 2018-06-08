@@ -32,7 +32,7 @@ class TimelineTableViewController: UITableViewController {
             }
         }
 
-        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         refresh(self)
     }
 
