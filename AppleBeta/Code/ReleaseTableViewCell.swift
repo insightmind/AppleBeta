@@ -29,17 +29,6 @@ class ReleaseTableViewCell: UITableViewCell {
     @IBOutlet weak var releaseTitle: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     func setup(_ item: RSSFeedItem) {
 
         self.item = item
@@ -84,5 +73,4 @@ class ReleaseTableViewCell: UITableViewCell {
         self.updateType = .other
         self.typeImageView.image = nil
     }
-
 }

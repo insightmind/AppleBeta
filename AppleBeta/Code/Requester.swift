@@ -14,43 +14,43 @@ enum ReleaseSources: String {
     case ipsw = "https://ipsw.me/timeline.rss"
     case apple = "https://developer.apple.com/news/releases/rss/releases.rss"
 
-    func url() -> URL? { return URL(string: self.rawValue) }
+    var url: URL? { return URL(string: self.rawValue) }
 }
 
 class Requester {
+    enum RequesterError: Error {
+        case invalidURL
+        case invalidResult
+        case invalidData
+    }
 
     static let queue = DispatchQueue(label: "AppleBeta", qos: .userInitiated)
-
     static var currentSource: ReleaseSources = .apple
 
-    static func request(url: URL?, completion: ((RSSFeed?) -> Void)?) {
+    static func request(
+        url: URL,
+        failure: ((Error) -> Void)? = nil,
+        completion: @escaping (RSSFeed) -> Void
+    ) {
+        let parser = FeedParser(URL: url)
         queue.async {
-            guard let feedURL = url else {
-                completion?(nil)
-                return
-            }
-            let parser = FeedParser(URL: feedURL)
-
             guard let result = parser?.parse() else {
-                completion?(nil)
+                failure?(RequesterError.invalidResult)
                 return
             }
-            if result.isFailure {
-                completion?(nil)
-                return
-            }
-            if let error = result.error {
-                print(error.localizedDescription)
-                completion?(nil)
+
+            if result.isFailure, let error = result.error {
+                failure?(error)
                 return
             }
 
             if result.isSuccess {
                 switch result {
                 case let .rss(feed):
-                    completion?(feed)
+                    DispatchQueue.main.async { completion(feed) }
+
                 default:
-                    completion?(nil)
+                    failure?(RequesterError.invalidData)
                 }
             }
         }
@@ -58,47 +58,37 @@ class Requester {
 
     @discardableResult
     static func handle(feed: RSSFeed) -> UIBackgroundFetchResult {
-
-        guard let pubDate = feed.pubDate else { return .noData }
-
+        let currentDate = Date()
         let defaults = UserDefaults.standard
-        let date = defaults.object(forKey: "LastFetch") as? Date ?? pubDate
+        let date = defaults.object(forKey: "LastFetch") as? Date ?? Date(timeIntervalSince1970: 0)
 
         guard let items = feed.items?.reversed() else { return .noData }
 
         var badgeCount = 0
 
-        for item in items {
-
-            guard let itemDate = item.pubDate else { continue }
-
-            let comparison = Calendar(identifier: .gregorian).compare(itemDate, to: date, toGranularity: .nanosecond)
-            if comparison == .orderedAscending { break }
-
-            guard let title = item.title else { continue }
-            guard let description = item.description else { continue }
+        items.filter { item -> Bool in
+            guard let itemDate = item.pubDate else { return false }
+            return date < itemDate
+        }.forEach { item in
+            guard let title = item.title else { return }
 
             let content = UNMutableNotificationContent()
-            content.title = title
-            content.body = description
+            content.title = "A new software update is now available."
+            content.body = title
             content.sound = UNNotificationSound.default
 
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
             let request = UNNotificationRequest(identifier: title, content: content, trigger: trigger)
 
-            let center = UNUserNotificationCenter.current()
-            center.add(request, withCompletionHandler: nil)
-
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             badgeCount += 1
         }
 
         UIApplication.shared.applicationIconBadgeNumber = badgeCount
 
-        defaults.set(pubDate, forKey: "LastFetch")
+        defaults.set(currentDate, forKey: "LastFetch")
         defaults.synchronize()
 
         return .newData
     }
-
 }
