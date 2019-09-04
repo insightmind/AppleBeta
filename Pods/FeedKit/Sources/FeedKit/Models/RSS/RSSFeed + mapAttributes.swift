@@ -1,7 +1,7 @@
 //
 //  RSSFeed + mapAttributes.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -180,7 +180,8 @@ extension RSSFeed {
         .rssChannelItunesOwnerEmail,
         .rssChannelItunesSubtitle,
         .rssChannelItunesSummary,
-        .rssChannelItunesKeywords:
+        .rssChannelItunesKeywords,
+        .rssChannelItunesType:
 
             if  self.iTunes == nil {
                 self.iTunes = ITunesNamespace()
@@ -245,6 +246,10 @@ extension RSSFeed {
         case
         .rssChannelItemMediaThumbnail,
         .rssChannelItemMediaContent,
+        .rssChannelItemMediaContentTitle,
+        .rssChannelItemMediaContentDescription,
+        .rssChannelItemMediaContentPlayer,
+        .rssChannelItemMediaContentThumbnail,
         .rssChannelItemMediaCommunity,
         .rssChannelItemMediaCommunityMediaStarRating,
         .rssChannelItemMediaCommunityMediaStatistics,
@@ -294,6 +299,32 @@ extension RSSFeed {
                 }
                 
                 self.items?.last?.media?.mediaContents?.append(MediaContent(attributes: attributes))
+                
+            case .rssChannelItemMediaContentTitle:
+                
+                if  self.items?.last?.media?.mediaContents?.last?.mediaTitle == nil {
+                    self.items?.last?.media?.mediaContents?.last?.mediaTitle = MediaTitle(attributes: attributes)
+                }
+                
+            case .rssChannelItemMediaContentDescription:
+                
+                if  self.items?.last?.media?.mediaContents?.last?.mediaDescription == nil {
+                    self.items?.last?.media?.mediaContents?.last?.mediaDescription = MediaDescription(attributes: attributes)
+                }
+                
+            case .rssChannelItemMediaContentPlayer:
+                
+                if  self.items?.last?.media?.mediaContents?.last?.mediaPlayer == nil {
+                    self.items?.last?.media?.mediaContents?.last?.mediaPlayer = MediaPlayer(attributes: attributes)
+                }
+                
+            case .rssChannelItemMediaContentThumbnail:
+                
+                if  self.items?.last?.media?.mediaContents?.last?.mediaThumbnails == nil {
+                    self.items?.last?.media?.mediaContents?.last?.mediaThumbnails = []
+                }
+                
+                self.items?.last?.media?.mediaContents?.last?.mediaThumbnails?.append(MediaThumbnail(attributes: attributes))
                 
             case .rssChannelItemMediaCommunity:
                 

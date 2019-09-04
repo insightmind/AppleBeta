@@ -1,7 +1,7 @@
 //
 //  AtomFeedContributor.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -44,6 +44,8 @@ public class AtomFeedContributor {
     /// NOT contain more than one.  The content of atom:uri in a Person
     /// construct MUST be an IRI reference [RFC3987].
     public var uri: String?
+    
+    public init() { }
     
 }
 

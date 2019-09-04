@@ -1,5 +1,5 @@
 //
-//  String + toDate.swift
+//  URL + replacingScheme.swift
 //
 //  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
@@ -24,29 +24,24 @@
 
 import Foundation
 
-extension String {
-    
-    /// Attempts to convert the textual representation of a date with
-    /// the specified `DateSpec` to a `Date` object.
+extension URL {
+    /// Returns a new `URL` in which the target scheme is replaced by another given
+    /// scheme. Returns `self` if the scheme already matches the target scheme.
     ///
-    /// - Parameter spec: The `DateSpec` to interpert the string.
-    /// - Returns: A `Date` object, or nil if the conversion failed.
-    func toDate(from spec: DateSpec) -> Date? {
-        switch spec {
-        case .rfc822:   return RFC822DateFormatter().date(from: self)
-        case .rfc3999:  return RFC3339DateFormatter().date(from: self)
-        case .iso8601:  return ISO8601DateFormatter().date(from: self)
+    /// - Parameters:
+    ///   - target: The target scheme
+    ///   - replacement: The replacement scheme
+    func replacing<Target, Replacement>(
+        scheme target: Target,
+        with replacement: Replacement)
+        -> URL? where Target : StringProtocol, Replacement : StringProtocol
+    {
+        var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true)
+        let isTargetScheme = urlComponents?.scheme?.caseInsensitiveCompare(target) == ComparisonResult.orderedSame
+        if isTargetScheme {
+            urlComponents?.scheme = "\(replacement)"
+            return urlComponents?.url
         }
+        return self
     }
-    
-    /// Attempts to convert the textual representation of a date to a
-    /// `Date` object according to several common schemes.
-    ///
-    /// - Returns: A `Date` object, or nil if the conversion failed.
-    func toPermissiveDate() -> Date? {
-        return RFC822DateFormatter().date(from: self) ??
-            (RFC3339DateFormatter().date(from: self) ??
-            ISO8601DateFormatter().date(from: self))
-    }
-    
 }

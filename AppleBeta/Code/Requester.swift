@@ -27,32 +27,20 @@ class Requester {
     static let queue = DispatchQueue(label: "AppleBeta", qos: .userInitiated)
     static var currentSource: ReleaseSources = .apple
 
-    static func request(
-        url: URL,
-        failure: ((Error) -> Void)? = nil,
-        completion: @escaping (RSSFeed) -> Void
-    ) {
+    static func request(url: URL, failure: ((Error) -> Void)? = nil, completion: @escaping (RSSFeed) -> Void) {
         let parser = FeedParser(URL: url)
-        queue.async {
-            guard let result = parser?.parse() else {
-                failure?(RequesterError.invalidResult)
-                return
-            }
-
+        parser.parseAsync { result in
             if result.isFailure, let error = result.error {
                 failure?(error)
                 return
             }
 
-            if result.isSuccess {
-                switch result {
-                case let .rss(feed):
-                    DispatchQueue.main.async { completion(feed) }
-
-                default:
-                    failure?(RequesterError.invalidData)
-                }
+            guard result.isSuccess, let feed = result.rssFeed else {
+                failure?(RequesterError.invalidData)
+                return
             }
+
+            DispatchQueue.main.async { completion(feed) }
         }
     }
 

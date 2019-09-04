@@ -1,7 +1,7 @@
 //
 //  MediaStatus.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -46,6 +46,8 @@ public class MediaStatus {
     /// The element's attributes.
     public var attributes: Attributes?
     
+    public init() { }
+
 }
 
 // MARK: - Initializers

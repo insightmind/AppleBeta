@@ -1,7 +1,7 @@
 //
 //  AtomFeedGenerator.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -61,6 +61,8 @@ public class AtomFeedGenerator {
     
     /// The element's value.
     public var value: String?
+    
+    public init() { }
     
 }
 

@@ -1,7 +1,7 @@
 //
 //  MediaNamespace.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -172,7 +172,8 @@ public class MediaNamespace {
     /// start and end time of a particular scene in the media, respectively.
     public var mediaScenes: [MediaScene]?
     
-    
+    public init() { }
+
 }
 
 // MARK: - Equatable

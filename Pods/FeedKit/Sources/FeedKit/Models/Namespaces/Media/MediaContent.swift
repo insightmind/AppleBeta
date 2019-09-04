@@ -1,7 +1,7 @@
 //
 //  MediaContent.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,26 @@ import Foundation
 /// audio/video specific, this element can be used to publish any type of
 /// media. It contains 14 attributes, most of which are optional.
 public class MediaContent {
+    
+    /// The title of the particular media object. It has one optional attribute.
+    public var mediaTitle: MediaTitle?
+    
+    /// Short description describing the media object typically a sentence in
+    /// length. It has one optional attribute.
+    public var mediaDescription: MediaDescription?
+    
+    /// Allows the media object to be accessed through a web browser media player
+    /// console. This element is required only if a direct media url attribute is
+    /// not specified in the <media:content> element. It has one required attribute
+    /// and two optional attributes.
+    public var mediaPlayer: MediaPlayer?
+    
+    /// Allows particular images to be used as representative images for the
+    /// media object. If multiple thumbnails are included, and time coding is not
+    /// at play, it is assumed that the images are in order of importance. It has
+    /// one required attribute and three optional attributes.
+    public var mediaThumbnails: [MediaThumbnail]?
+    
     
     /// The element's attributes.
     public class Attributes {
@@ -101,6 +121,8 @@ public class MediaContent {
     /// The element's attributes
     public var attributes: Attributes?
     
+    public init() { }
+
 }
 
 // MARK: - Initializers

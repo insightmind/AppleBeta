@@ -1,7 +1,7 @@
 //
 //  FeedParser.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -28,36 +28,73 @@ import Dispatch
 /// An RSS and Atom feed parser. `FeedParser` uses `Foundation`'s `XMLParser`.
 public class FeedParser {
     
+    private var data: Data?
+    private var url: URL?
+    private var xmlStream: InputStream?
+    
     /// A FeedParser handler provider.
-    let parser: FeedParserProtocol
+    var parser: FeedParserProtocol?
    
+    /// Initializes the parser with the JSON or XML content referenced by the given URL.
+    ///
+    /// - Parameter URL: URL whose contents are read to produce the feed data
+    public init(URL: URL) {
+        self.url = URL
+    }
+    
     /// Initializes the parser with the xml or json contents encapsulated in a 
     /// given data object.
     ///
-    /// - Parameter data: An instance of `FeedParser`.
-    public init?(data: Data) {
-        guard let feedDataType = FeedDataType(data: data) else { return nil }
-        switch feedDataType {
-        case .json: self.parser = JSONFeedParser(data: data)
-        case .xml:  self.parser = XMLFeedParser(data: data)
-        }
+    /// - Parameter data: XML or JSON data
+    public init(data: Data) {
+        self.data = data
     }
     
-    /// Initializes the parser with the XML content referenced by the given URL.
+    /// Initializes the parser with the XML contents encapsulated in a
+    /// given InputStream.
     ///
-    /// - Parameter URL: An instance of `FeedParser`.
-    public convenience init?(URL: URL) {
-        guard let data = try? Data(contentsOf: URL) else {
-            return nil
-        }
-        self.init(data: data)
+    /// - Parameter xmlStream: An InputStream that yields XML data.
+    public init(xmlStream: InputStream) {
+        self.xmlStream = xmlStream
     }
     
     /// Starts parsing the feed.
     ///
     /// - Returns: The parsed `Result`.
     public func parse() -> Result {
-        return self.parser.parse()
+        
+        if let url = url {
+            // The `Data(contentsOf:)` initializer doesn't handle the `feed` URI scheme. As such,
+            // it's sanitized first, in case it's in fact a `feed` scheme.
+            guard let sanitizedSchemeUrl = url.replacing(scheme: "feed", with: "http") else {
+                return Result.failure(ParserError.internalError(reason: "Failed url sanitizing.").value)
+            }
+
+            do {
+                data = try Data(contentsOf: sanitizedSchemeUrl)
+            } catch {
+                return Result.failure(error as NSError)
+            }
+        }
+        
+        if let data = data {
+            guard let feedDataType = FeedDataType(data: data) else {
+                return Result.failure(ParserError.feedNotFound.value)
+            }
+            switch feedDataType {
+            case .json: parser = JSONFeedParser(data: data)
+            case .xml:  parser = XMLFeedParser(data: data)
+            }
+            return parser!.parse()
+        }
+        
+        if let xmlStream = xmlStream {
+            parser = XMLFeedParser(stream: xmlStream)
+            return parser!.parse()
+        }
+        
+        return Result.failure(ParserError.internalError(reason: "Fatal error. Unable to parse from the initialized state.").value)
+        
     }
     
     /// Starts parsing the feed asynchronously. Parsing runs by default on the
@@ -84,7 +121,7 @@ public class FeedParser {
     
     /// Stops parsing XML feeds.
     public func abortParsing() {
-        guard let xmlFeedParser = self.parser as? XMLFeedParser else { return }
+        guard let xmlFeedParser = parser as? XMLFeedParser else { return }
         xmlFeedParser.xmlParser.abortParsing()
     }
     

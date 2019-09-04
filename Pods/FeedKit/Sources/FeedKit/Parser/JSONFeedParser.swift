@@ -1,7 +1,7 @@
 //
 //  JSONFeedParser.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -37,21 +37,11 @@ class JSONFeedParser: FeedParserProtocol {
     }
     
     func parse() -> Result {
-        
         do {
-            
-            let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            
-            guard let jsonDictionary = jsonObject as? [String: Any?] else {
-                return Result.failure(ParserError.internalError(reason: "Unable to cast serialized json.").value)
-            }
-            
-            guard let jsonFeed = JSONFeed(dictionary: jsonDictionary) else {
-                return Result.failure(ParserError.feedNotFound.value)
-            }
-            
-            return Result.json(jsonFeed)
-            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = Date.decodingStrategy
+            let decoded = try decoder.decode(JSONFeed.self, from: data)
+            return Result.json(decoded)
         } catch {
             return Result.failure(NSError(domain: error.localizedDescription, code: -1))
         }

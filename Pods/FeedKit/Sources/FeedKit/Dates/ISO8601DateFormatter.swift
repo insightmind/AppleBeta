@@ -1,7 +1,7 @@
 //
 //  ISO8601DateFormatter.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,10 @@ import Foundation
 class ISO8601DateFormatter: DateFormatter {
     
     let dateFormats = [
-        "yyyy-mm-dd'T'hh:mm",
-        "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
         "yyyy-MM-dd'T'HH:mm:ss.SSZZZZZ",
-        "yyyy-MM-dd'T'HH:mmSSZZZZZ"
+        "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+        "yyyy-MM-dd'T'HH:mmSSZZZZZ",
+        "yyyy-MM-dd'T'HH:mm"
         ]
     
     override init() {
@@ -46,6 +46,7 @@ class ISO8601DateFormatter: DateFormatter {
     }
     
     override func date(from string: String) -> Date? {
+        let string = string.trimmingCharacters(in: .whitespacesAndNewlines)
         for dateFormat in self.dateFormats {
             self.dateFormat = dateFormat
             if let date = super.date(from: string) {

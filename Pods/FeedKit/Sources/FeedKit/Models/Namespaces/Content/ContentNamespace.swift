@@ -1,7 +1,7 @@
 //
 //  ContentNamespace.swift
 //
-//  Copyright (c) 2017 Nuno Manuel Dias
+//  Copyright (c) 2016 - 2018 Nuno Manuel Dias
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,8 @@ public class ContentNamespace {
     /// <content:encoded><![CDATA[<p>What a <em>beautiful</em> day!</p>]]>
     /// </content:encoded>
     public var contentEncoded: String?
+    
+    public init() { }
     
 }
 

@@ -5,7 +5,7 @@ target 'AppleBeta' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-    pod 'FeedKit', '~> 6.0'
+    pod 'FeedKit', '~> 8.1.1'
 
   # Pods for AppleBeta
 
