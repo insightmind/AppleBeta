@@ -9,17 +9,6 @@
 import UIKit
 import FeedKit
 
-enum UpdateType: String {
-    case iOS = "iOS"
-    case watchOS = "watchOS"
-    case iTunes = "iTunes"
-    case macOS = "macOS"
-    case tvOS = "tvOS"
-    case other = "other"
-
-    static let all = [iOS, watchOS, iTunes, macOS, tvOS, other]
-}
-
 class ReleaseTableViewCell: UITableViewCell {
 
     var item: RSSFeedItem?
@@ -30,11 +19,13 @@ class ReleaseTableViewCell: UITableViewCell {
     @IBOutlet weak var releaseDate: UILabel!
 
     func setup(_ item: RSSFeedItem) {
-
         self.item = item
+        configureIcon()
+        configureTitle()
+    }
 
-        setupImage()
-
+    private func configureTitle() {
+        guard let item = self.item else { return }
         var title = item.title
         if let range = title?.range(of: "Released") {
             title?.removeSubrange(range)
@@ -46,31 +37,21 @@ class ReleaseTableViewCell: UITableViewCell {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
 
-        guard let date = item.pubDate else {
+        if let date = item.pubDate {
+            releaseDate.text = dateFormatter.string(from: date)
+        } else {
             releaseDate.text = item.description
-            return
         }
-
-        releaseDate.text = dateFormatter.string(from: date)
-
     }
 
-    func setupImage() {
+    private func configureIcon() {
         guard let titleString = self.item?.title else { return }
-
-        for type in UpdateType.all {
-            if titleString.contains(type.rawValue) {
-                self.updateType = type
-                break
-            }
-        }
-
-        let image = UIImage(named: updateType.rawValue)
-        typeImageView.image = image
+        updateType = .resolve(from: titleString)
+        typeImageView.image = updateType.icon
     }
 
     override func prepareForReuse() {
-        self.updateType = .other
-        self.typeImageView.image = nil
+        updateType = .other
+        typeImageView.image = nil
     }
 }

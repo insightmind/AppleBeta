@@ -2,18 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "macOS.png",
-      "scale" : "1x"
+      "filename" : "Mac.pdf"
     },
     {
       "idiom" : "universal",
-      "filename" : "macOS@2x.png",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "macOS@3x.png",
-      "scale" : "3x"
+      "filename" : "MacDark.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {

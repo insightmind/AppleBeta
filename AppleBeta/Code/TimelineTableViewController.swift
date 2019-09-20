@@ -36,12 +36,13 @@ class TimelineTableViewController: UITableViewController {
             failure: {
                 print($0.localizedDescription)
                 self.refreshControl?.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0)
-        },
+            },
             completion: { feed in
                 self.data = feed.items ?? []
                 self.tableView.reloadData()
                 self.refreshControl?.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0)
-        })
+            }
+        )
     }
 
     // MARK: - Table view data source
@@ -59,4 +60,7 @@ class TimelineTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
 }

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iPhone.pdf"
+      "filename" : "iPad.pdf"
     },
     {
       "idiom" : "universal",
-      "filename" : "iPhoneDark.pdf",
+      "filename" : "iPadDark.pdf",
       "appearances" : [
         {
           "appearance" : "luminosity",

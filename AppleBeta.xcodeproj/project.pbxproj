@@ -17,6 +17,7 @@
 		854D25A2202E3ECE006C756F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 854D25A1202E3ECE006C756F /* Podfile */; };
 		854DDB39202E610F00B7CCF0 /* TimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854DDB38202E610F00B7CCF0 /* TimelineTableViewController.swift */; };
 		854DDB3B202E615E00B7CCF0 /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854DDB3A202E615E00B7CCF0 /* Requester.swift */; };
+		F738613F2333F76800F1EA69 /* UpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738613E2333F76800F1EA69 /* UpdateType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		854DDB3A202E615E00B7CCF0 /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
 		854DDB41202E634400B7CCF0 /* AppleBeta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleBeta.entitlements; sourceTree = "<group>"; };
 		E28EF6C2298AA148D0B6C743 /* Pods_AppleBeta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppleBeta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F738613E2333F76800F1EA69 /* UpdateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				854DDB38202E610F00B7CCF0 /* TimelineTableViewController.swift */,
 				854DDB3A202E615E00B7CCF0 /* Requester.swift */,
 				854D0E562031EEF900D33526 /* ReleaseTableViewCell.swift */,
+				F738613E2333F76800F1EA69 /* UpdateType.swift */,
 				852C6114203DFD39002733C5 /* TabBarViewController.swift */,
 			);
 			path = Code;
@@ -259,6 +262,7 @@
 			files = (
 				854D258B202E36C6006C756F /* AppDelegate.swift in Sources */,
 				854D0E572031EEF900D33526 /* ReleaseTableViewCell.swift in Sources */,
+				F738613F2333F76800F1EA69 /* UpdateType.swift in Sources */,
 				854DDB39202E610F00B7CCF0 /* TimelineTableViewController.swift in Sources */,
 				852C6115203DFD39002733C5 /* TabBarViewController.swift in Sources */,
 				854DDB3B202E615E00B7CCF0 /* Requester.swift in Sources */,
