@@ -8,6 +8,8 @@ You can also see the timeline of all releases within the app.
 
 ---
 
+---
+
 __Feel free to participate in the repo.__
 
 ---
