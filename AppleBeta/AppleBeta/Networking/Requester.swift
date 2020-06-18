@@ -57,40 +57,4 @@ class Requester {
             }
         }
     }
-
-    @discardableResult
-    private func handle(feed: RSSFeed) -> UIBackgroundFetchResult {
-        let currentDate = Date()
-        let defaults = UserDefaults.standard
-        let date = defaults.object(forKey: "LastFetch") as? Date ?? Date(timeIntervalSince1970: 0)
-
-        guard let items = feed.items?.reversed() else { return .noData }
-
-        var badgeCount = 0
-
-        items.filter { item -> Bool in
-            guard let itemDate = item.pubDate else { return false }
-            return date < itemDate
-        }.forEach { item in
-            guard let title = item.title else { return }
-
-            let content = UNMutableNotificationContent()
-            content.title = "A new software update is now available."
-            content.body = title
-            content.sound = UNNotificationSound.default
-
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
-            let request = UNNotificationRequest(identifier: title, content: content, trigger: trigger)
-
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            badgeCount += 1
-        }
-
-        UIApplication.shared.applicationIconBadgeNumber = badgeCount
-
-        defaults.set(currentDate, forKey: "LastFetch")
-        defaults.synchronize()
-
-        return .newData
-    }
 }

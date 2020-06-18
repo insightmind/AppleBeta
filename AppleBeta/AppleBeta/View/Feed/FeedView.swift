@@ -18,6 +18,7 @@ struct FeedView: View {
     var body: some View {
         NavigationView {
             List(feed, rowContent: FeedCellView.init)
+                .id(UUID())
                 .onAppear(perform: loadFeed)
                 .navigationBarTitle(title)
         }
