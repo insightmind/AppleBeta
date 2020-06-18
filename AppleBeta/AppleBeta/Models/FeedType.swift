@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum UpdateType: String, CaseIterable {
+enum FeedType: String, CaseIterable {
     case iOS = "iOS"
     case iPadOS = "iPadOS"
     case watchOS = "watchOS"

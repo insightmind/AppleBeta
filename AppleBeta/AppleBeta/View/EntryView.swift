@@ -10,7 +10,18 @@ import SwiftUI
 
 struct EntryView: View {
     var body: some View {
-        Text("Hello, World!")
+        TabView {
+            FeedView(title: "Apple Releases", source: .apple)
+                .tabItem {
+                    Image("Apple")
+                    Text("Apple Releases")
+                }
+            FeedView(title: "IPSW", source: .ipsw)
+                .tabItem {
+                    Image("IPSW")
+                    Text("IPSW")
+                }
+        }
     }
 }
 

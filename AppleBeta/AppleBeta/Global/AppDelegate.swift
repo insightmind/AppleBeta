@@ -34,8 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func reloadReleases(_ task: BGAppRefreshTask) {
-        guard let url = ReleaseSources.apple.url else { return }
-        Requester.request(url: url, failure: nil, completion: { Requester.handle(feed: $0) })
+        // TODO: Implement this
     }
 
     private func scheduleBackgroundReload() {

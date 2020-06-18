@@ -10,13 +10,6 @@ import UIKit
 import UserNotifications
 import FeedKit
 
-enum ReleaseSources: String {
-    case ipsw = "https://ipsw.me/timeline.rss"
-    case apple = "https://developer.apple.com/news/releases/rss/releases.rss"
-
-    var url: URL? { return URL(string: self.rawValue) }
-}
-
 class Requester {
     enum RequesterError: Error {
         case invalidURL
@@ -25,9 +18,29 @@ class Requester {
     }
 
     static let queue = DispatchQueue(label: "AppleBeta", qos: .userInitiated)
-    static var currentSource: ReleaseSources = .apple
 
-    static func request(url: URL, failure: ((Error) -> Void)? = nil, completion: @escaping (RSSFeed) -> Void) {
+    func loadFeed(for source: Source, failure: ((Error) -> Void)? = nil, completion: @escaping ([FeedItem]) -> Void) {
+        guard let url = source.url else {
+            failure?(RequesterError.invalidURL)
+            return
+        }
+
+        request(url: url, failure: failure) { feed in
+            guard let items = feed.items else {
+                DispatchQueue.main.async { completion([]) }
+                return
+            }
+
+            let feedItems = items.compactMap { item -> FeedItem? in
+                guard let title = item.title, let date = item.pubDate else { return nil }
+                return FeedItem(type: .resolve(from: title), title: title, date: date)
+            }
+
+            DispatchQueue.main.async { completion(feedItems) }
+        }
+    }
+
+    private func request(url: URL, failure: ((Error) -> Void)? = nil, completion: @escaping (RSSFeed) -> Void) {
         let parser = FeedParser(URL: url)
         parser.parseAsync { result in
             switch result {
@@ -37,7 +50,7 @@ class Requester {
                     return
                 }
 
-                DispatchQueue.main.async { completion(feed) }
+                completion(feed)
 
             case let .failure(error):
                 failure?(error)
@@ -46,7 +59,7 @@ class Requester {
     }
 
     @discardableResult
-    static func handle(feed: RSSFeed) -> UIBackgroundFetchResult {
+    private func handle(feed: RSSFeed) -> UIBackgroundFetchResult {
         let currentDate = Date()
         let defaults = UserDefaults.standard
         let date = defaults.object(forKey: "LastFetch") as? Date ?? Date(timeIntervalSince1970: 0)
