@@ -26,6 +26,7 @@ struct FeedView: View {
             .onAppear(perform: loadFeed)
             .navigationBarTitle(title)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 
     private func loadFeed() {
