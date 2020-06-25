@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FeedCellView: View {
+struct FeedCell: View {
     @State var feedItem: FeedItem
 
     var body: some View {
@@ -32,11 +32,14 @@ struct FeedCellView: View {
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, idealHeight: 60, alignment: .leading)
+        .onAppear {
+            UITableView.appearance().separatorColor = nil
+        }
     }
 }
 
 struct FeedCellView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedCellView(feedItem: FeedItem(type: .iOS, title: "Xcode 11.6 beta (11N700h)", date: Date()))
+        FeedCell(feedItem: FeedItem(type: .iOS, title: "Xcode 11.6 beta (11N700h)", date: Date()))
     }
 }

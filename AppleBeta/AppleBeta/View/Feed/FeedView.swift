@@ -17,16 +17,18 @@ struct FeedView: View {
 
     var body: some View {
         NavigationView {
-            List(feed, rowContent: FeedCellView.init)
-                .id(UUID())
-                .onAppear(perform: loadFeed)
-                .navigationBarTitle(title)
+            ScrollView {
+                LazyVGrid(columns: [GridItem()]) {
+                    ForEach(feed, content: FeedCell.init)
+                        .padding([.leading, .trailing])
+                }
+            }
+            .onAppear(perform: loadFeed)
+            .navigationBarTitle(title)
         }
     }
 
     private func loadFeed() {
-        guard feed.isEmpty else { return }
-
         Requester().loadFeed(for: source) { feed in
             self.feed = feed
         }
